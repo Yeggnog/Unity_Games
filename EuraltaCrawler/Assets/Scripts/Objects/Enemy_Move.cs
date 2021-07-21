@@ -30,21 +30,22 @@ public class Enemy_Move : Grid_Move
                     // starting turn
                     switch(state){
                         case unitStates.MenuMode:
-                        Debug.Log("going to action mode");
+                        //Debug.Log("going to action mode");
                             // move to move mode
                             state = unitStates.ActionMode;
                         break;
                         case unitStates.MoveMode:
-                            Debug.Log("moving towards target");
+                            //Debug.Log("moving towards target");
                             // move towards target
                             FindNearestTarget();
                             if(target != null){
+                                //Debug.Log("Target found, targeting");
                                 FindSelectableTiles(move);
                                 CalculatePath();
                                 //state = unitStates.MenuMode;
                             }else{
                                 // end turn
-                                Debug.Log("No target found in range, waiting");
+                                //Debug.Log("No target found in range, waiting");
                                 state = unitStates.MoveMode;
                                 turn = false;
                                 TurnManager.EndTurn();
@@ -74,10 +75,10 @@ public class Enemy_Move : Grid_Move
                                     anim.Play("Slash");
                                     atkfct.delay = 30;
                                     trg.healthBar.GetComponent<HealthBar>().UpdateValue(trg.healthBar.GetComponent<HealthBar>().value - 3);
-                                    Debug.Log("Enemy attacked ["+target+"] for 3 dmg");
+                                    //Debug.Log("Enemy attacked ["+target+"] for 3 dmg");
                                 }
                             }else{
-                                Debug.Log("No attack, ending turn");
+                                //Debug.Log("No attack, ending turn");
                                 state = unitStates.MoveMode;
                                 turn = false;
                                 TurnManager.EndTurn();
@@ -98,14 +99,14 @@ public class Enemy_Move : Grid_Move
 
     void CalculatePath(){
         Tile targetTile = GetTargetTile(target);
-        /*bool test = FindPath(targetTile); // A* pathfinding
+        bool test = FindPath(targetTile); // A* pathfinding
         if(!test){
             // no path available
             state = unitStates.MoveMode;
             turn = false;
             TurnManager.EndTurn();
-        }*/
-        FindPath(targetTile); // A* pathfinding
+        }
+        //FindPath(targetTile); // A* pathfinding
     }
 
     void FindNearestTarget(){

@@ -60,6 +60,15 @@ public class Tile : MonoBehaviour
         f = 0;
         g = 0;
         h = 0;
+
+        Collider[] coll = Physics.OverlapBox(transform.position, new Vector3(3.5f, 0.1f, 3.5f));
+        bool flag = false;
+        foreach(Collider item in coll){
+            if(item.tag != "Tile" && item.tag != "Player" && item.tag != "Enemy"){
+                flag = true;
+            }
+        }
+        walkable = !flag;
     }
 
     // finds the four neighbors for a tile

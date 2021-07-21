@@ -7,13 +7,13 @@ public class PowerObject : PowerLine
     public override void PowerUpdate(bool state, GameObject caller){
         // change power state
         powered = state;
-        if(powered){
+        //if(powered){
             // do object action once
             ObjectAction();
-        }else{
+        //}else{
             // do post action once
-            PostAction();
-        }
+            //PostAction();
+        //}
     }
 
     protected virtual void ObjectAction(){

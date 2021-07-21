@@ -24,8 +24,10 @@ public class PowerLine : MonoBehaviour
         //lightsrc.SetActive(powered);
         if(powered){
             gameObject.GetComponent<MeshRenderer>().material = lit;
+            Debug.Log("<powerline> Changed material to lit variant");
         }else{
             gameObject.GetComponent<MeshRenderer>().material = unlit;
+            Debug.Log("<powerline> Changed material to unlit variant");
         }
     }
 }

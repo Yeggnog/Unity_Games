@@ -106,7 +106,15 @@ public class Grid_Move : MonoBehaviour
             if(t.distance < dist){
                 List<Tile> adj = t.adjacent;
                 foreach(Tile neighbor in adj){
-                    if(!neighbor.visited){
+                    Collider[] coll = Physics.OverlapBox(neighbor.transform.position, new Vector3(3.5f, 0.1f, 3.5f));
+                    bool flag = false;
+                    foreach(Collider item in coll){
+                        if(item.tag != "Tile" && item.tag != "Player" && item.tag != "Enemy"){
+                            flag = true;
+                        }
+                    }
+                    if(!neighbor.visited){ // add check here
+                        neighbor.walkable = !flag;
                         neighbor.visited = true;
                         neighbor.parent = t;
                         neighbor.distance = (t.distance + 1);
@@ -223,17 +231,17 @@ public class Grid_Move : MonoBehaviour
     void Jump(Vector3 target){
         if(falling){
             // fall down
-            //Debug.Log("<jump> Falling down");
+            Debug.Log("<jump> Falling down");
             FallDown(target);
         }else if(jumping){
             // jump up
             JumpUp(target);
         }else if(moveToEdge){
             // move to the edge in prep to jump down
-            //Debug.Log("<jump> Moving to edge");
+            Debug.Log("<jump> Moving to edge");
             MoveToEdge();
         }else{
-            //Debug.Log("<jump> Preparing to jump");
+            Debug.Log("<jump> Preparing to jump");
             PrepareJump(target);
         }
     }
@@ -245,13 +253,13 @@ public class Grid_Move : MonoBehaviour
         CalculateHeading(target);
         // determine jump state
         if(transform.position.y > targetY){
-            //Debug.Log("<jump> Decided to jump down");
+            Debug.Log("<jump> Decided to jump down");
             // jump down (move to edge and fall down)
             falling = false;
             jumping = false;
             moveToEdge = true;
             jumpTarget = transform.position + ((target - transform.position) / 2.0f);
-            //Debug.Log("<jump> Set jump target pos to "+jumpTarget+", current pos is "+transform.position);
+            Debug.Log("<jump> Set jump target pos to "+jumpTarget+", current pos is "+transform.position);
             anim.Play("JumpDown");
         }else{
             // jump up (jump over edge and fall down)
@@ -268,7 +276,7 @@ public class Grid_Move : MonoBehaviour
     void FallDown(Vector3 target){
         velocity += (Physics.gravity*9f) * Time.deltaTime;
         if(transform.position.y <= target.y){
-            //Debug.Log("<jump> Landed from falling");
+            Debug.Log("<jump> Landed from falling");
             // landed
             falling = false;
             Vector3 pos = transform.position;
@@ -291,10 +299,10 @@ public class Grid_Move : MonoBehaviour
         Vector3 targ_horiz = jumpTarget;
         targ_horiz.y = transform.position.y;
         if(Vector3.Distance(transform.position, targ_horiz) >= 1f){
-            //Debug.Log("<jump> Moving, current pos is "+transform.position);
+            Debug.Log("<jump> Moving, current pos is "+transform.position);
             SetHorizontalVelocity();
         }else{
-            //Debug.Log("<jump> Reached the edge");
+            Debug.Log("<jump> Reached the edge");
             // reached edge
             moveToEdge = false;
             falling = true;
@@ -313,12 +321,13 @@ public class Grid_Move : MonoBehaviour
         //
     }
 
-    protected void FindPath(Tile target){
+    protected bool FindPath(Tile target){
         ComputeAdjacencyLists(jumpHeight, target);
         GetCurrentTile();
 
         List<Tile> closedList = new List<Tile>();
         List<Tile> openList = new List<Tile>();
+        bool foundPath = false;
 
         // set up A* for first step
         openList.Add(currentTile);
@@ -352,15 +361,18 @@ public class Grid_Move : MonoBehaviour
                 }
             }else{
                 // found target
+                //Debug.Log("found a path");
                 actualTargetTile = FindEndTile(t);
                 actualTargetTile.target = true;
                 MoveToTile(actualTargetTile);
                 //return true;
+                foundPath = true;
             }
         }
 
-        Debug.Log("path not found, skipping turn for now");
+        //Debug.Log("path not found, skipping turn for now");
         //return false;
+        return foundPath;
     }
 
     protected Tile FindLowestF(List<Tile> list){

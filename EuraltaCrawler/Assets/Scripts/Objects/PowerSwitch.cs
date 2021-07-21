@@ -13,6 +13,7 @@ public class PowerSwitch : TriggerTile
         PowerLine pwr = next.GetComponent<PowerLine>();
         pwr.PowerUpdate(!powered, pwr.prev);
         //lightsrc.SetActive(true);
+        powered = !powered;
     }
 
     protected override void PostAction(){

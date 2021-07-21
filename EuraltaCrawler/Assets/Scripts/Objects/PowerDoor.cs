@@ -6,6 +6,7 @@ public class PowerDoor : PowerObject
 {
     public GameObject door;
     public float moveAmount = 16f;
+    public float moveSpeed = 1f;
     float doorOffset = 0f;
     bool moving = false;
     Vector3 doorPos = Vector3.zero;
@@ -50,10 +51,10 @@ public class PowerDoor : PowerObject
             door.transform.position = doorPos + (orientation * doorOffset);
         }
 
-        if(doorOffset >= 0.1f){
-            doorOffset -= 0.1f;
-        }else if(doorOffset <= -0.1f){
-            doorOffset += 0.1f;
+        if(doorOffset >= moveSpeed*0.1f){
+            doorOffset -= moveSpeed*0.1f;
+        }else if(doorOffset <= -moveSpeed*0.1f){
+            doorOffset += moveSpeed*0.1f;
         }else{
             if(moving){
                 // unpause game
