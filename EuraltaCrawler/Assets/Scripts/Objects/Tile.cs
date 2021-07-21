@@ -27,23 +27,15 @@ public class Tile : MonoBehaviour
         // recolor tile
         if(current){
             // current tile color
-            // white?
-            //GetComponent<Renderer>().material.color = new Color32(0, 222, 255, 102); //Color.white;
             GetComponent<Renderer>().material = tile_colors[3];
         }else if(target){
             // target tile color
-            // greenish blue
-            //GetComponent<Renderer>().material.color = new Color32(0, 255, 201, 102); //Color.green;
             GetComponent<Renderer>().material = tile_colors[1];
         }else if(selectable){
             // selectable tile color(in move range)
-            // light blue
-            //GetComponent<Renderer>().material.color = new Color32(0, 150, 255, 102); //Color.blue;
             GetComponent<Renderer>().material = tile_colors[2];
         }else{
             // default tile color
-            // dark blue
-            //GetComponent<Renderer>().material.color = new Color32(21, 41, 203, 102); //Color.grey;
             GetComponent<Renderer>().material = tile_colors[0];
         }
     }
@@ -87,9 +79,7 @@ public class Tile : MonoBehaviour
         foreach(Collider item in coll){
             Tile tile = item.GetComponent<Tile>();
             if(tile != null && tile.walkable){
-                //if(/*!Physics.Raycast(tile.transform.position + (new Vector3(0f, -4f, 0f)), Vector3.up, out hit, 8) ||*/ (tile == target)){
-                    adjacent.Add(tile);
-                //}
+                adjacent.Add(tile);
             }
         }
     }

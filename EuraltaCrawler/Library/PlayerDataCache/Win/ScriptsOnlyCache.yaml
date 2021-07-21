@@ -9,6 +9,7 @@ ScriptsOnlyBuild:
     - Enemy_Move
     - GameManager
     - Grid
+    - HealLight
     - HealPoint
     - HealthBar
     - LoadZone
@@ -143,17 +144,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12774}
     - Class: 114
-      Script: {instanceID: 13000}
+      Script: {instanceID: 13002}
     - Class: 114
-      Script: {instanceID: 13030}
+      Script: {instanceID: 13032}
     - Class: 114
-      Script: {instanceID: 13040}
+      Script: {instanceID: 13042}
     - Class: 114
-      Script: {instanceID: 13148}
+      Script: {instanceID: 13150}
     - Class: 114
-      Script: {instanceID: 13156}
+      Script: {instanceID: 13158}
     - Class: 114
-      Script: {instanceID: 13224}
+      Script: {instanceID: 13226}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -228,11 +229,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12756}
     - Class: 114
-      Script: {instanceID: 13040}
+      Script: {instanceID: 13042}
     - Class: 114
-      Script: {instanceID: 13148}
+      Script: {instanceID: 13150}
     - Class: 114
-      Script: {instanceID: 13224}
+      Script: {instanceID: 13226}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -331,17 +332,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12774}
     - Class: 114
-      Script: {instanceID: 13000}
+      Script: {instanceID: 13002}
     - Class: 114
-      Script: {instanceID: 13030}
+      Script: {instanceID: 13032}
     - Class: 114
-      Script: {instanceID: 13040}
+      Script: {instanceID: 13042}
     - Class: 114
-      Script: {instanceID: 13148}
+      Script: {instanceID: 13150}
     - Class: 114
-      Script: {instanceID: 13156}
+      Script: {instanceID: 13158}
     - Class: 114
-      Script: {instanceID: 13224}
+      Script: {instanceID: 13226}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -452,17 +453,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12774}
     - Class: 114
-      Script: {instanceID: 13000}
+      Script: {instanceID: 12964}
     - Class: 114
-      Script: {instanceID: 13030}
+      Script: {instanceID: 13002}
     - Class: 114
-      Script: {instanceID: 13040}
+      Script: {instanceID: 13032}
     - Class: 114
-      Script: {instanceID: 13148}
+      Script: {instanceID: 13042}
     - Class: 114
-      Script: {instanceID: 13156}
+      Script: {instanceID: 13150}
     - Class: 114
-      Script: {instanceID: 13224}
+      Script: {instanceID: 13158}
+    - Class: 114
+      Script: {instanceID: 13226}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -573,17 +576,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12774}
     - Class: 114
-      Script: {instanceID: 13000}
+      Script: {instanceID: 12964}
     - Class: 114
-      Script: {instanceID: 13030}
+      Script: {instanceID: 13002}
     - Class: 114
-      Script: {instanceID: 13040}
+      Script: {instanceID: 13032}
     - Class: 114
-      Script: {instanceID: 13148}
+      Script: {instanceID: 13042}
     - Class: 114
-      Script: {instanceID: 13156}
+      Script: {instanceID: 13150}
     - Class: 114
-      Script: {instanceID: 13224}
+      Script: {instanceID: 13158}
+    - Class: 114
+      Script: {instanceID: 13226}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -686,17 +691,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12756}
     - Class: 114
-      Script: {instanceID: 13000}
+      Script: {instanceID: 13002}
     - Class: 114
-      Script: {instanceID: 13030}
+      Script: {instanceID: 13032}
     - Class: 114
-      Script: {instanceID: 13040}
+      Script: {instanceID: 13042}
     - Class: 114
-      Script: {instanceID: 13148}
+      Script: {instanceID: 13150}
     - Class: 114
-      Script: {instanceID: 13156}
+      Script: {instanceID: 13158}
     - Class: 114
-      Script: {instanceID: 13224}
+      Script: {instanceID: 13226}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -799,17 +804,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12756}
     - Class: 114
-      Script: {instanceID: 13000}
+      Script: {instanceID: 13002}
     - Class: 114
-      Script: {instanceID: 13030}
+      Script: {instanceID: 13032}
     - Class: 114
-      Script: {instanceID: 13040}
+      Script: {instanceID: 13042}
     - Class: 114
-      Script: {instanceID: 13148}
+      Script: {instanceID: 13150}
     - Class: 114
-      Script: {instanceID: 13156}
+      Script: {instanceID: 13158}
     - Class: 114
-      Script: {instanceID: 13224}
+      Script: {instanceID: 13226}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -882,11 +887,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12756}
     - Class: 114
-      Script: {instanceID: 13040}
+      Script: {instanceID: 13042}
     - Class: 114
-      Script: {instanceID: 13148}
+      Script: {instanceID: 13150}
     - Class: 114
-      Script: {instanceID: 13224}
+      Script: {instanceID: 13226}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -1186,7 +1191,7 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
-      Hash: cb85eab28caa61b25b8ec00916f35950
+      Hash: c127179005c872c45cbcd139e0339279
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: HealPoint
@@ -1364,6 +1369,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_StyleSheet
+  - hash:
+      serializedVersion: 2
+      Hash: 0a9d3549e67f1bbe577844f61912d964
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: HealLight
   - hash:
       serializedVersion: 2
       Hash: 7d6ec6544fef13aa0e0e834f6c9e50c7

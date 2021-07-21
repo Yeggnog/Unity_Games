@@ -45,7 +45,6 @@ public class Grid : MonoBehaviour
                         prev = players[0].GetComponent<Player_Move>().currentTile;
                     }else{
                         prev = null;
-                        Debug.Log("Player not found");
                     }
                 }
                 Transform prevPos = prev.GetComponent<Transform>();
@@ -55,10 +54,6 @@ public class Grid : MonoBehaviour
                 if((tilePos.position.y-0.1f) != prevPos.position.y){
                     // add vertical intermediates
                     int vDist = (int)System.Math.Round((tilePos.position.y-0.1f)-prevPos.position.y);
-                    //int dir_sign = 1;
-                    //if(vDist != 0){
-                        //dir_sign = (vDist)/System.Math.Abs(vDist);
-                    //}
                     int tileCount = (int)System.Math.Round((System.Math.Abs(vDist))/8f);
                     Vector3 offset = new Vector3(-5.5f*prevToCurr.z, 0f, -5.5f*prevToCurr.x);
                     for(int j=0; j<tileCount; j++){
@@ -72,8 +67,6 @@ public class Grid : MonoBehaviour
                         }else{
                             newTile.GetComponent<Transform>().position -= ((j*8.3f)*Vector3.up);
                         }
-                        //newTile.GetComponent<Transform>().position += dir_sign*(((j+1)*8.3f)*Vector3.up);// + dir_offset_V(PTChoriz);
-                        //Debug.Log("<path> Got vertical offset "+ dir_sign*(((j+1)*8.3f)*Vector3.up) + "from i="+i);
                         newTile.GetComponent<Transform>().forward = PTChoriz;
                         newTile.GetComponent<SpriteRenderer>().sprite = arrowSprites[5];
                         newTile.GetComponent<pathArrow>().vertical = true;
@@ -81,7 +74,6 @@ public class Grid : MonoBehaviour
                     }
                 }
                 int ind = dir_index(prevToCurr, Vector3.zero, true);
-                //Debug.Log("<path> got index "+ind);
                 arrowTiles[i].GetComponent<SpriteRenderer>().sprite = arrowSprites[ind];
                 arrowTiles[i].GetComponent<Transform>().rotation = new Quaternion(1f, 0f, 0f, 1f);
             }else{
@@ -97,7 +89,6 @@ public class Grid : MonoBehaviour
                         prev = players[0].GetComponent<Player_Move>().currentTile;
                     }else{
                         prev = null;
-                        Debug.Log("Player not found");
                     }
                 }
                 Transform prevPos = prev.GetComponent<Transform>();
@@ -108,13 +99,9 @@ public class Grid : MonoBehaviour
                 Vector3 currToNext = (next.GetComponent<Transform>().position - (tilePos.position + new Vector3(4f, -0.1f, -4f)));
                 currToNext.Normalize();
                 Vector3 PTChoriz = new Vector3(prevToCurr.x, 0f, prevToCurr.z);
-                if((tilePos.position.y-0.1f) != /*next.GetComponent<Transform>().position.y*/prevPos.position.y){
+                if((tilePos.position.y-0.1f) != prevPos.position.y){
                     // add vertical intermediates
                     int vDist = (int)System.Math.Round(tilePos.position.y-prevPos.position.y);
-                    //int dir_sign = 1;
-                    //if(vDist != 0){
-                        //dir_sign = (vDist)/System.Math.Abs(vDist);
-                    //}
                     int tileCount = (int)System.Math.Round((System.Math.Abs(vDist))/8f);
                     Vector3 offset = new Vector3(-5.5f*prevToCurr.z, 0f, -5.5f*prevToCurr.x);
                     for(int j=0; j<tileCount; j++){
@@ -123,14 +110,11 @@ public class Grid : MonoBehaviour
                             edgeNudge = 6f;
                         }
                         GameObject newTile = Instantiate(arrowTile, prevPos.position + offset + (PTChoriz*edgeNudge) + dir_offset_H(dir_index(PTChoriz, Vector3.zero, true)), Quaternion.identity);
-                        //newTile.GetComponent<Transform>().position += (vDist/System.Math.Abs(vDist))*(((j+1)*8.3f)*Vector3.up);
                         if(vDist >= 0){
                             newTile.GetComponent<Transform>().position += (((j+1)*8.3f)*Vector3.up);
                         }else{
                             newTile.GetComponent<Transform>().position -= ((j*8.3f)*Vector3.up);
                         }
-                        //newTile.GetComponent<Transform>().position += dir_sign*(((j+1)*8.3f)*Vector3.up);// + dir_offset_V(PTChoriz);
-                        //Debug.Log("<path> Got vertical offset "+ dir_sign*(((j+1)*8.3f)*Vector3.up) + "from i="+i);
                         newTile.GetComponent<Transform>().forward = PTChoriz;
                         newTile.GetComponent<SpriteRenderer>().sprite = arrowSprites[5];
                         newTile.GetComponent<pathArrow>().vertical = true;
@@ -138,7 +122,6 @@ public class Grid : MonoBehaviour
                     }
                 }
                 int ind = dir_index(prevToCurr, currToNext, false);
-                //Debug.Log("<path> got index "+ind);
                 arrowTiles[i].GetComponent<SpriteRenderer>().sprite = arrowSprites[ind];
                 arrowTiles[i].GetComponent<Transform>().forward = -Vector3.up;
             }
@@ -174,7 +157,6 @@ public class Grid : MonoBehaviour
     }
 
     int dir_index(Vector3 inDir, Vector3 outDir, bool end){
-        //Debug.Log("<path> calling dir_index with in="+inDir+", out="+outDir+", end="+end);
         // gets an index based on direction
             if(end){
                 // last in path

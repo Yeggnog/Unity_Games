@@ -55,25 +55,12 @@ public class Grid_Move : MonoBehaviour
 
     public void GetCurrentTile(){
         currentTile = GetTargetTile(gameObject);
-        //if(currentTile == null){
-            //Debug.Log("["+this+"] got current tile ["+currentTile+"]");
-        //}
         currentTile.current = true;
     }
 
     public Tile GetTargetTile(GameObject target){
         RaycastHit hit;
         Tile targ = null;
-
-        // check for the current tile
-        //Vector3 extents = GetComponent<Collider>().bounds.max;
-        //Collider[] coll = Physics.OverlapBox(transform.position, extents);
-        //foreach(Collider item in coll){
-            //Tile tile = item.GetComponent<Tile>();
-            //if(tile != null && targ == null){
-                //targ = tile;
-            //}
-        //}
         // secondary check
         if(Physics.Raycast(target.transform.position, -Vector3.up, out hit, 8)){
             targ = hit.collider.GetComponent<Tile>();
@@ -149,11 +136,9 @@ public class Grid_Move : MonoBehaviour
 
     public void Move(){
         if(path.Count > 0){
-            //Debug.Log("Current tile is "+currentTile);
             state = unitStates.Moving;
             // move along the path
             Tile t = path.Peek();
-            //Debug.Log("Got target tile "+t);
             Vector3 target = t.transform.position;
             target.y += yOffset + t.GetComponent<Collider>().bounds.extents.y;
             // tile visibility, only show tiles in path
@@ -175,15 +160,12 @@ public class Grid_Move : MonoBehaviour
                     SetHorizontalVelocity();
                     anim.Play("Walk");
                 }
-                // <add animation here>
-                //transform.forward = velocity;
                 transform.forward = heading;
                 transform.position += velocity * Time.deltaTime;
             }else{
                 // reached target position
                 transform.position = target;
                 currentTile = t;
-                //Debug.Log("Updated current tile to "+currentTile);
                 path.Pop();
                 falling = false;
                 jumping = false;
@@ -194,14 +176,7 @@ public class Grid_Move : MonoBehaviour
             RemoveSelectableTiles();
             moving = false;
             // tile visibility
-            /*foreach(GameObject item in tiles){
-                Tile tile = item.GetComponent<Tile>();
-                tile.GetComponent<MeshRenderer>().enabled = true;
-            }*/
             showGrid();
-            // add combat turn here
-            //Debug.Log("["+this+"] Calling for action phase");
-            //StartAction();
             state = unitStates.MenuMode;
             actionState = menuStates.Select;
             anim.Play("Idle");
@@ -209,10 +184,6 @@ public class Grid_Move : MonoBehaviour
     }
 
     protected void RemoveSelectableTiles(){
-        /*if(currentTile != null){
-            currentTile.current = false;
-            currentTile = null;
-        }*/
         foreach(Tile tile in selectable){
             tile.Reset();
         }
@@ -231,17 +202,14 @@ public class Grid_Move : MonoBehaviour
     void Jump(Vector3 target){
         if(falling){
             // fall down
-            Debug.Log("<jump> Falling down");
             FallDown(target);
         }else if(jumping){
             // jump up
             JumpUp(target);
         }else if(moveToEdge){
             // move to the edge in prep to jump down
-            Debug.Log("<jump> Moving to edge");
             MoveToEdge();
         }else{
-            Debug.Log("<jump> Preparing to jump");
             PrepareJump(target);
         }
     }
@@ -253,13 +221,11 @@ public class Grid_Move : MonoBehaviour
         CalculateHeading(target);
         // determine jump state
         if(transform.position.y > targetY){
-            Debug.Log("<jump> Decided to jump down");
             // jump down (move to edge and fall down)
             falling = false;
             jumping = false;
             moveToEdge = true;
             jumpTarget = transform.position + ((target - transform.position) / 2.0f);
-            Debug.Log("<jump> Set jump target pos to "+jumpTarget+", current pos is "+transform.position);
             anim.Play("JumpDown");
         }else{
             // jump up (jump over edge and fall down)
@@ -276,7 +242,6 @@ public class Grid_Move : MonoBehaviour
     void FallDown(Vector3 target){
         velocity += (Physics.gravity*9f) * Time.deltaTime;
         if(transform.position.y <= target.y){
-            Debug.Log("<jump> Landed from falling");
             // landed
             falling = false;
             Vector3 pos = transform.position;
@@ -299,10 +264,8 @@ public class Grid_Move : MonoBehaviour
         Vector3 targ_horiz = jumpTarget;
         targ_horiz.y = transform.position.y;
         if(Vector3.Distance(transform.position, targ_horiz) >= 1f){
-            Debug.Log("<jump> Moving, current pos is "+transform.position);
             SetHorizontalVelocity();
         }else{
-            Debug.Log("<jump> Reached the edge");
             // reached edge
             moveToEdge = false;
             falling = true;
@@ -361,17 +324,12 @@ public class Grid_Move : MonoBehaviour
                 }
             }else{
                 // found target
-                //Debug.Log("found a path");
                 actualTargetTile = FindEndTile(t);
                 actualTargetTile.target = true;
                 MoveToTile(actualTargetTile);
-                //return true;
                 foundPath = true;
             }
         }
-
-        //Debug.Log("path not found, skipping turn for now");
-        //return false;
         return foundPath;
     }
 
@@ -407,11 +365,6 @@ public class Grid_Move : MonoBehaviour
             return endTile;
         }
     }
-
-    /*public void StartAction(){
-        // do nothing for now
-        Debug.Log("Doing nothing in default StartAction");
-    }*/
 
     public void hideGrid(){
         foreach(GameObject item in tiles){

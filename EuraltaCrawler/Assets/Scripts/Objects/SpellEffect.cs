@@ -7,28 +7,12 @@ public class SpellEffect : MonoBehaviour
     public Grid_Move target;
     public int dmg;
     public Animator anim;
-    //public GameObject self;
     public Player_Move ply;
     public ParticleSystem[] effects;
     public int spell_index;
     ParticleSystem part;
-    
-    // Start is called before the first frame update
-    /*void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }*/
 
     public void SpellCast(){
-        //
-        //anim = GetComponent<Animator>();
-        Debug.Log("<anim> Starting sigil spin");
         anim.Play("SigilRotate");
     }
 
@@ -38,7 +22,6 @@ public class SpellEffect : MonoBehaviour
     }
 
     public void SpellDamage(){
-        Debug.Log("<anim> Finished sigil spin, damaging");
         // do damage
         target.HP -= dmg;
     }
@@ -49,8 +32,6 @@ public class SpellEffect : MonoBehaviour
         ply.state = Grid_Move.unitStates.MoveMode;
         ply.turn = false;
         TurnManager.EndTurn();
-        //Destroy(part, 0.5f);
-        //Destroy(self);
         Destroy(gameObject);
     }
 }

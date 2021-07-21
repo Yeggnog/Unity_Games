@@ -6,7 +6,6 @@ public class PowerLine : MonoBehaviour
 {
     public GameObject prev = null;
     public GameObject next = null;
-    //public GameObject lightsrc;
     public Material unlit;
     public Material lit;
     protected bool powered = false;
@@ -21,7 +20,6 @@ public class PowerLine : MonoBehaviour
             Debug.Log("Passed power state "+state+" to "+prev);
             prev.GetComponent<PowerLine>().PowerUpdate(state, gameObject);
         }
-        //lightsrc.SetActive(powered);
         if(powered){
             gameObject.GetComponent<MeshRenderer>().material = lit;
             Debug.Log("<powerline> Changed material to lit variant");

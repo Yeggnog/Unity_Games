@@ -13,7 +13,6 @@ public class TriggerTile : MonoBehaviour
             bool chk = Physics.Raycast(transform.position + (new Vector3(0f, -4f, 0f)), Vector3.up, out hit, 8f);
             if(chk && !triggered){
                 if(hit.collider.tag == "Player"){
-                    Debug.Log("Triggered trigger tile");
                     // perform action
                     triggered = true;
                     TileAction();
@@ -28,11 +27,9 @@ public class TriggerTile : MonoBehaviour
 
     protected virtual void TileAction(){
         // does nothing for now
-        Debug.Log("Did nothing");
     }
 
     protected virtual void PostAction(){
         // does nothing for now
-        Debug.Log("Did nothing");
     }
 }

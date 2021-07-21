@@ -16,12 +16,10 @@ public class PowerDoor : PowerObject
     protected override void ObjectAction(){
         // open door
         if(!open){
-            Debug.Log("Opening door");
             doorPos -= (orientation * moveAmount);
             doorOffset = moveAmount;
             open = true;
         }else{
-            Debug.Log("Closing door");
             doorPos += (orientation * moveAmount);
             doorOffset = -moveAmount;
             open = false;
@@ -30,7 +28,6 @@ public class PowerDoor : PowerObject
 
     protected override void PostAction(){
         // close door
-        Debug.Log("Closing door");
         doorPos += (orientation * moveAmount);
         doorOffset = -moveAmount;
     }

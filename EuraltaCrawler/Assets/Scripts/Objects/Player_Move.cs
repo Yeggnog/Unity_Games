@@ -15,19 +15,16 @@ public class Player_Move : Grid_Move
     
     // Start is called before the first frame update
     void Start(){
-        //Debug.Log("Started player");
         Init();
         magicBar.GetComponent<HealthBar>().value = MP;
         magicBar.GetComponent<HealthBar>().maxValue = MP;
         TurnManager.AddUnit(this);
-        //Debug.Log("Added player "+this+" to TurnManager");
     }
 
     // Update is called once per frame
     void Update(){
         // death check
         if(HP > 0){
-            //Debug.Log("Player is not dead");
         
         // pause input
         if(Input.GetKeyDown("escape")){
@@ -47,16 +44,13 @@ public class Player_Move : Grid_Move
         if(turn){
             if(!moving){
                 if(state == unitStates.MenuMode || state == unitStates.ActionMode){
-                    //Debug.Log("Starting action phase with action state "+actionState);
                     // starting the action phase
                     actionMenu.SetActive(true);
                     switch(actionState){
                         case menuStates.Attack:
-                            //Debug.Log("Rangefinding: attack");
                             FindSelectableTiles(1);
                         break;
                         case menuStates.Magic:
-                            //Debug.Log("Rangefinding: magic");
                             // magic rangefinding
                             if(spellIndex == 0){
                                 // smite
@@ -67,7 +61,6 @@ public class Player_Move : Grid_Move
                             }
                         break;
                         case menuStates.Interact:
-                            //Debug.Log("Rangefinding: interact");
                             FindSelectableTiles(1);
                         break;
                     }
@@ -81,22 +74,16 @@ public class Player_Move : Grid_Move
                 Move();
             }
         }else{
-            //Debug.Log("turn="+turn+" paused="+GameManager.paused);
             actionMenu.SetActive(false);
             magicList.SetActive(false);
             magicBar.SetActive(false);
         }
 
-        }else{
-            //Debug.Log("Game is paused");
         }
 
         }else{
             // die
             GameManager.paused = true;
-            //TurnManager.RemoveUnit(this);
-            //turn = false;
-            //TurnManager.EndTurn();
             // activate death menu
             deathMenu.SetActive(true);
         }
@@ -150,7 +137,6 @@ public class Player_Move : Grid_Move
                     Tile t = hit.collider.GetComponent<Tile>();
                     if(t.selectable && state == unitStates.MoveMode){
                         // set target
-                        Debug.Log("Clicked on target tile, moving to target");
                         Grid.ResetPathArrow();
                         MoveToTile(t);
                     }
@@ -162,24 +148,19 @@ public class Player_Move : Grid_Move
                     switch(state){
                         case unitStates.MoveMode:
                             // do nothing, go to menu mode
-                            Debug.Log("No move, going to action menu");
                             state = unitStates.MenuMode;
-                            //actionMenu.SetActive(true);
                         break;
                         case unitStates.ActionMode:
                             if(actionState == menuStates.Attack || actionState == menuStates.Select){
                                 // return to menu mode
-                                Debug.Log("Going back to action menu");
                                 state = unitStates.MenuMode;
                                 magicList.SetActive(false);
                                 magicBar.SetActive(false);
                             }else if(actionState == menuStates.Interact){
                                 if(hit.collider.tag == "HealPoint"){
                                     // restore MP
-                                    Debug.Log("Healing player's MP, currently "+MP);
                                     hit.collider.GetComponent<HealPoint>().Heal(this);
                                     magicBar.GetComponent<HealthBar>().UpdateValue(MP);
-                                    Debug.Log("MP is now "+MP);
                                     state = unitStates.MoveMode;
                                     turn = false;
                                     TurnManager.EndTurn();
@@ -204,13 +185,11 @@ public class Player_Move : Grid_Move
                                                 actionMenu.SetActive(false);
                                                 magicList.SetActive(false);
                                                 magicBar.SetActive(false);
-                                                //HP += 4;
                                                 hideGrid();
                                                 GameObject newSigil = Instantiate(sigil_prefab, currentTile.GetComponent<Transform>().position, Quaternion.identity);
                                                 SpellEffect sefc = newSigil.GetComponent<SpellEffect>();
                                                 sefc.target = this;
                                                 sefc.dmg = -4;
-                                                //newSigil.GetComponent<SpellEffect>().self = newSigil;
                                                 sefc.ply = this;
                                                 sefc.spell_index = spellIndex;
                                                 spellIndex = -1;
@@ -219,9 +198,7 @@ public class Player_Move : Grid_Move
                                                 MP -= 1;
                                                 magicBar.GetComponent<HealthBar>().UpdateValue(MP);
                                                 sefc.SpellCast();
-                                                //healthBar.GetComponent<HealthBar>().value += 4;
                                                 healthBar.GetComponent<HealthBar>().UpdateValue(healthBar.GetComponent<HealthBar>().value + 4);
-                                                Debug.Log("Healed self for 4 hp");
                                                 }
                                             break;
                                         }
@@ -230,7 +207,6 @@ public class Player_Move : Grid_Move
                             break;
                             case unitStates.MoveMode:
                                 // do nothing, go into menu mode
-                                //Debug.Log("No move, going to action menu");
                                 clicked.state = unitStates.MenuMode;
                                 actionMenu.SetActive(true);
                             break;
@@ -264,7 +240,6 @@ public class Player_Move : Grid_Move
                                         anim.Play("Slash");
                                         atkfct.delay = 30;
                                         clicked.healthBar.GetComponent<HealthBar>().UpdateValue(clicked.healthBar.GetComponent<HealthBar>().value - 3);
-                                        Debug.Log("Attacked enemy ["+clicked+"] for 3 dmg");
                                     break;
                                     case menuStates.Magic:
                                         // cast spell
@@ -277,7 +252,6 @@ public class Player_Move : Grid_Move
                                                 SpellEffect sef = newSigl.GetComponent<SpellEffect>();
                                                 sef.target = clicked;
                                                 sef.dmg = 6;
-                                                //newSigl.GetComponent<SpellEffect>().self = newSigl;
                                                 sef.ply = this;
                                                 sef.spell_index = spellIndex;
                                                 state = unitStates.Actioning;
@@ -285,10 +259,7 @@ public class Player_Move : Grid_Move
                                                 MP -= 1;
                                                 magicBar.GetComponent<HealthBar>().UpdateValue(MP);
                                                 sef.SpellCast();
-                                                //clicked.healthBar.GetComponent<HealthBar>().value -= 6;
                                                 clicked.healthBar.GetComponent<HealthBar>().UpdateValue(clicked.healthBar.GetComponent<HealthBar>().value - 6);
-                                                //clicked.HP -= 6;
-                                                Debug.Log("Smote enemy ["+clicked+"] for 6 dmg");
                                             break;
                                             case 1:
                                                 // heal (does nothing unless undead?)
@@ -296,8 +267,7 @@ public class Player_Move : Grid_Move
                                                 GameObject newSgl = Instantiate(sigil_prefab, clicked.currentTile.GetComponent<Transform>().position, Quaternion.identity);
                                                 SpellEffect sefct = newSgl.GetComponent<SpellEffect>();
                                                 sefct.target = clicked;
-                                                sefct.dmg = -4;
-                                                //newSgl.GetComponent<SpellEffect>().self = newSgl;
+                                                sefct.dmg = 4;
                                                 sefct.ply = this;
                                                 sefct.spell_index = spellIndex;
                                                 state = unitStates.Actioning;
@@ -305,10 +275,7 @@ public class Player_Move : Grid_Move
                                                 MP -= 1;
                                                 magicBar.GetComponent<HealthBar>().UpdateValue(MP);
                                                 sefct.SpellCast();
-                                                //clicked.healthBar.GetComponent<HealthBar>().value += 4;
-                                                clicked.healthBar.GetComponent<HealthBar>().UpdateValue(clicked.healthBar.GetComponent<HealthBar>().value + 4);
-                                                //clicked.HP += 4;
-                                                Debug.Log("Healed enemy ["+clicked+"] for 4 hp");
+                                                clicked.healthBar.GetComponent<HealthBar>().UpdateValue(clicked.healthBar.GetComponent<HealthBar>().value - 4);
                                             break;
                                         }
                                         }
@@ -333,16 +300,4 @@ public class Player_Move : Grid_Move
             }
         }
     }
-
-    //public void Move(){
-        // solve inheritance issues
-        //base.Move(StartAction);
-    //}
-
-    //public void StartAction(){
-        // 
-        //actionMenu.SetActive(true);
-        //state = unitStates.MenuMode;
-        //actionState = menuStates.Select;
-    //}
 }
