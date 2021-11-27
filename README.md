@@ -2,6 +2,10 @@
 My game projects in Unity
 
 # Current Projects
+Dashteroids
+- Screenshake
+- Additive blending with materials
+
 Teccocrypt
 - 3D grid-based movement
 - Turn-based battle system
