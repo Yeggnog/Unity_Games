@@ -38,7 +38,6 @@ public class ScreenManip : MonoBehaviour
 
     public static void screenShake(float mag, int duration){
         // shake the screen
-        Debug.Log("Got screenshake with mag "+mag+" and duration "+duration);
         shakeTimer += duration;
         shakeMag = mag;
     }

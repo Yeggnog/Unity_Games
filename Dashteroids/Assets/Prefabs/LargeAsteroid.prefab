@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7196579971448937809}
   m_Layer: 9
   m_Name: LargeAsteroid
-  m_TagString: Untagged
+  m_TagString: Asteroid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,9 +111,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a1f1923164a2fc48a333bacebdcfc21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  small_asteroid: {fileID: 6734091037991516843, guid: a72ba4a1570d93c4da016dbd871bee31,
+  smallAsteroid: {fileID: 6734091037991516843, guid: a72ba4a1570d93c4da016dbd871bee31,
     type: 3}
-  large_debris: {fileID: 1732476296392059889, guid: 1fff3b879196f0d4da178a0349a15bbc,
+  largeDebris: {fileID: 1732476296392059889, guid: 1fff3b879196f0d4da178a0349a15bbc,
     type: 3}
-  small_debris: {fileID: 6984611213064827787, guid: 4b198b5129917f94abdd8301703225ca,
+  smallDebris: {fileID: 6984611213064827787, guid: 4b198b5129917f94abdd8301703225ca,
     type: 3}
+  asteroidSprites:
+  - {fileID: 389369978429745654, guid: 28b70e0061136d149acd5c7a3747755d, type: 3}
+  - {fileID: -1590424690247807216, guid: 28b70e0061136d149acd5c7a3747755d, type: 3}
+  - {fileID: 557460676825372174, guid: 28b70e0061136d149acd5c7a3747755d, type: 3}
+  - {fileID: -7942959793311113564, guid: 28b70e0061136d149acd5c7a3747755d, type: 3}
+  - {fileID: 5753243307665895285, guid: d6f178ec2b0d6dd4f85fa67923b703ef, type: 3}
+  - {fileID: -4999424557709043154, guid: d6f178ec2b0d6dd4f85fa67923b703ef, type: 3}
+  - {fileID: -8274318285757748320, guid: d6f178ec2b0d6dd4f85fa67923b703ef, type: 3}
+  - {fileID: -6185722731226751997, guid: d6f178ec2b0d6dd4f85fa67923b703ef, type: 3}
