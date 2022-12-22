@@ -1,0 +1,11 @@
+.vscode/
+Dashteroids_Data/
+MonoBleedingEdge/
+Library/
+Packages/
+Logs/
+ProjectSettings/
+Assembly-CSharp.csproj
+Dashteroids.sln
+UnityCrashHandler32
+UnityPlayer.dll

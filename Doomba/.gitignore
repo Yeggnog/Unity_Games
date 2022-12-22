@@ -1,0 +1,8 @@
+.vscode/
+Library/
+Packages/
+Logs/
+ProjectSettings/
+UserSettings/
+Assembly-CSharp.csproj
+Doomba.sln
