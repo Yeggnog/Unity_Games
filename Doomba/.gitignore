@@ -2,6 +2,7 @@
 Library/
 Packages/
 Logs/
+Temp/
 ProjectSettings/
 UserSettings/
 Assembly-CSharp.csproj
